@@ -60,12 +60,54 @@ var todoList = {
   }
 };
 
-displayTodosButton.addEventListener('click', function () {
-  todoList.displayTodos();
-});
-//access the DOM, add event listener for ToggleAllButton
-var toggleAllButton = document.getElementById('toggleAllButton');
+var handlers = {
+  displayTodos: function () {
+    todoList.displayTodos();
+  },
+  addTodo: function () {
+    var addTodoTextInput = document.getElementById('addTodoTextInput');
+    todoList.addTodo(addTodoTextInput.value);
+    addTodoTextInput.value = '';
+  },
+  changeTodo: function () {
+    var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+    var changeTodoTextInput = document.getElementById('changeTodoTextInput');
+    todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+    changeTodoPositionInput.value = '';
+    changeTodoTextInput.value = '';
+  },
+  deleteTodo: function () {
+    var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
+    deleteTodoPositionInput.value = '';
+  },
+  toggleCompleted: function () {
+    var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+    todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
+    toggleCompletedPositionInput.value = '';
+  },
+  toggleAll: function () {
+    todoList.toggleAll();
+  }
 
-toggleAllButton.addEventListener('click', function () {
-  todoList.toggleAll();
-});
+};
+
+var view = {
+  displayTodos: function () {
+    var todosUl = document.querySelector('ul');
+    todosUl.innerHTML = ''; //clears out list before displaying
+    for (var i = 0; i < todoList.todos.length; i++) {
+      var todoLi = document.createElement('li'); //reference to li
+      var todo = todoList.todos[i]; // create var for current index
+      var todoTextWithCompletion = '';
+
+      if (todo.completed === true) {
+        todoTextWithCompletion = '(x)' + todo.todoText;
+      } else {
+        todoTextWithCompletion = '( )' + todo.todoText;
+      }
+      todoLi.textContent = todoTextWithCompletion;
+      todosUl.appendChild(todoLi); //to insert todoLi into todoUl
+    }
+  }
+};
