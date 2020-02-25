@@ -59,8 +59,6 @@ var todoList = {
     this.displayTodos();
   }
 };
-//access the DOM, add event listener for displayTodosButton
-var displayTodosButton = document.getElementById('displayTodosButton');
 
 displayTodosButton.addEventListener('click', function () {
   todoList.displayTodos();
