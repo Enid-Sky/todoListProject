@@ -19,19 +19,16 @@ var todoList = {
   toggleAll: function () {
     var totalTodos = this.todos.length;
     var completedTodos = 0;
-    //get number of completed todos
     for (var i = 0; i < totalTodos; i++) {
       if (this.todos[i].completed === true) {
         completedTodos++;
       }
     }
-    //Case 1: if everything is true, make everything false
+
     if (completedTodos === totalTodos) {
-      //make everything false
       for (var i = 0; i < totalTodos; i++) {
         this.todos[i].completed = false;
       }
-      //Case 2: Otherwise, make everything true.
     } else {
       for (var i = 0; i < totalTodos; i++) {
         this.todos[i].completed = true;
@@ -79,7 +76,7 @@ var view = {
     var todosUl = document.querySelector('ul');
     todosUl.innerHTML = ''; //clears out list before displaying
     for (var i = 0; i < todoList.todos.length; i++) {
-      var todoLi = document.createElement('li'); //reference to li
+      var todoLi = document.createElement('li');
       var todo = todoList.todos[i]; // create var for current index
       var todoTextWithCompletion = '';
 
